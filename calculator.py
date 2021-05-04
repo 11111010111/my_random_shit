@@ -1,11 +1,19 @@
 import numpy as np
 history = []
 running = False
+operators = ["+", "-", "*", "/", "**", "sqrt", "%"]
 
 
 def calc():
     running = True
     go()
+
+
+def end():
+    print("i see you are done")
+    print("imma go now ig")
+    print("cya")
+    quit()
 
 
 def check_float(potential_float):
@@ -18,10 +26,7 @@ def check_float(potential_float):
 
 def commands(command1):
     if command1 == "end":
-        print("i see you are done")
-        print("imma go now ig")
-        print("cya")
-        quit()
+        end()
     elif command1 == "help":
         print("The commands are:")
         print("history, end, help, command")
@@ -38,11 +43,22 @@ def commands(command1):
         helps()
     else:
         print("Please enter a valid command")
-        go()
+        helps()
     if not running:
         helps()
     else:
         calc()
+
+
+def com(command1):
+    if command1 == "command":
+        helps()
+    elif command1 == "end":
+        end()
+    else:
+        print("Not a valid integer/float")
+        print("Please try again")
+        go()
 
 
 def helps():
@@ -51,25 +67,39 @@ def helps():
     commands(command)
 
 
-def go():
-    # getting first number / command
+def get_first():
     print("First Command / Number")
     first = input("> ")
     if check_float(first):
         pass
     else:
-        commands(first)
-    # getting operator
+        com(first)
+    return first
+
+
+def get_operator():
     print("Operator")
     operation = input("> ")
-    # getting second number if operator is not "sqrt"
+    if operation in operators:
+        pass
+    else:
+        print("That is not an operator")
+        print("Please try again")
+        get_operator()
+    return operation
+
+
+def sqrt_check(operation):
     if operation == "sqrt":
         second = 0
         pass
     else:
         print("Second Number")
         second = input("> ")
-    # the math part
+    return second
+
+
+def the_actual_math(first, operation, second):
     if operation == "+":
         result = float(first) + float(second)
     elif operation == "-":
@@ -87,6 +117,19 @@ def go():
     else:
         print("You need to put an operator (+, -, *, /, **, sqrt) in the operator prompt")
         result = "Please try again"
+    return result
+
+
+def go():
+    # getting first number / command
+    first = get_first()
+    # getting operator
+    operation = get_operator()
+    # getting second number if operator is not "sqrt"
+    second = sqrt_check(operation)
+    # the math part
+    result = the_actual_math(first, operation, second)
+    # print the answer and store it
     print("The answer to your problem is")
     print(str(result))
     print("")
