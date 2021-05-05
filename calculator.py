@@ -62,6 +62,7 @@ def com(command1):
 
 
 def helps():
+    print("WELCOME TO MY CALCULATOR")
     print("Command ('start' to start)")
     command = input("> ")
     commands(command)
