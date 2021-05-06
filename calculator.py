@@ -1,7 +1,9 @@
 import numpy as np
+
 history = []
 running = False
-operators = ["+", "-", "*", "/", "**", "sqrt", "%"]
+operators = ["+", "-", "*", ".", "/", "**", "sqrt", "%", "<", "=", ">", "=/=", "//", "crt"]
+starting = True
 
 
 def calc():
@@ -40,29 +42,34 @@ def commands(command1):
         print("Lets go!!")
         calc()
     elif command1 == "command":
-        helps()
+        helps(command1)
     else:
         print("Please enter a valid command")
-        helps()
+        helps(False)
     if not running:
-        helps()
+        helps(command1)
     else:
         calc()
 
 
 def com(command1):
     if command1 == "command":
-        helps()
+        helps(False)
     elif command1 == "end":
         end()
+    elif command1 == "perfection":
+        print("I know right?!")
+        get_first()
     else:
         print("Not a valid integer/float")
         print("Please try again")
         go()
 
 
-def helps():
-    print("WELCOME TO MY CALCULATOR")
+def helps(starting):
+    if starting:
+        print("WELCOME TO MY CALCULATOR")
+        starting = False
     print("Command ('start' to start)")
     command = input("> ")
     commands(command)
@@ -71,6 +78,12 @@ def helps():
 def get_first():
     print("First Command / Number")
     first = input("> ")
+    if first == "pi":
+        first = np.pi
+    elif first == "e":
+        first = np.e
+    elif first == "phi":
+        first = 1.618033988749895
     if check_float(first):
         pass
     else:
@@ -90,8 +103,11 @@ def get_operator():
     return operation
 
 
-def sqrt_check(operation):
+def single_argument_check(operation):
     if operation == "sqrt":
+        second = 0
+        pass
+    elif operation == "crt":
         second = 0
         pass
     else:
@@ -111,10 +127,50 @@ def the_actual_math(first, operation, second):
         result = float(first) / float(second)
     elif operation == "**":
         result = float(first) ** float(second)
+    elif operation == "crt":
+        result = pow(float(first), 1 / 3)
     elif operation == "sqrt":
         result = np.sqrt(float(first))
     elif operation == "%":
         result = float(first) % float(second)
+    elif operation == "//":
+        result = float(first) // float(second)
+    elif operation == "<":
+        if first < second:
+            result = True
+        else:
+            result = False
+        if result:
+            result = (first + " is indeed less than " + second)
+        else:
+            result = (first + " is not less than " + second)
+    elif operation == "=":
+        if first == second:
+            result = True
+        else:
+            result = False
+        if result:
+            result = (first + " is indeed equal to " + second)
+        else:
+            result = (first + " is not equal to " + second)
+    elif operation == ">":
+        if first > second:
+            result = True
+        else:
+            result = False
+        if result:
+            result = (first + " is indeed more than " + second)
+        else:
+            result = (first + " is not more than " + second)
+    elif operation == "=/=":
+        if first != second:
+            result = True
+        else:
+            result = False
+        if result:
+            result = (first + " is indeed not equal to " + second)
+        else:
+            result = (first + " is indeed equal to " + second)
     else:
         print("You need to put an operator (+, -, *, /, **, sqrt) in the operator prompt")
         result = "Please try again"
@@ -127,7 +183,7 @@ def go():
     # getting operator
     operation = get_operator()
     # getting second number if operator is not "sqrt"
-    second = sqrt_check(operation)
+    second = single_argument_check(operation)
     # the math part
     result = the_actual_math(first, operation, second)
     # print the answer and store it
@@ -139,4 +195,4 @@ def go():
 
 
 while True:
-    helps()
+    helps(starting)
