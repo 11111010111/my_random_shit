@@ -104,6 +104,9 @@ def single_argument_check(operation):
     if operation == "sqrt":
         second = 0
         pass
+    elif operation == "crt":
+        second = 0
+        pass
     else:
         print("Second Number")
         second = input("> ")
