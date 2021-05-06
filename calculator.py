@@ -57,6 +57,9 @@ def com(command1):
         helps(False)
     elif command1 == "end":
         end()
+    elif command1 == "perfection":
+        print("I know right?!")
+        get_first()
     else:
         print("Not a valid integer/float")
         print("Please try again")
@@ -132,6 +135,15 @@ def the_actual_math(first, operation, second):
         result = float(first) % float(second)
     elif operation == "//":
         result = float(first) // float(second)
+    elif operation == "<":
+        if first < second:
+            result = True
+        else:
+            result = False
+        if result:
+            result = (first + " is indeed less than " + second)
+        else:
+            result = (first + " is not less than " + second)
     elif operation == "=":
         if first == second:
             result = True
