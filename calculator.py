@@ -45,7 +45,7 @@ def commands(command1):
         helps(command1)
     else:
         print("Please enter a valid command")
-        helps("command")
+        helps(False)
     if not running:
         helps(command1)
     else:
