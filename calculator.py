@@ -77,7 +77,12 @@ def helps(starting1):
 
 
 def square_root(x):
-    x = x ** (1/2)
+    x = x ** 0.5
+    return x
+
+
+def crt(x):
+    x = x ** (1/3)
     return x
 
 
@@ -139,9 +144,9 @@ def the_actual_math(first, operation, second):
     elif operation == "**":
         result = float(first) ** float(second)
     elif operation == "crt":
-        result = pow(float(first), 1 / 3)
+        result = "currently broken sorry, i will fix this sometime"
     elif operation == "sqrt":
-        result = square_root(first)
+        result = "currently broken sorry, i will fix this sometime"
     elif operation == "%":
         result = float(first) % float(second)
     elif operation == "//":
