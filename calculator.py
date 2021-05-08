@@ -1,24 +1,27 @@
+import enum
+
 import numpy as np
 
+# variables (theres not many here lol)
 history = []
 running = False
 operators = ["+", "-", "*", ".", "/", "**", "sqrt", "%", "<", "=", ">", "=/=", "//", "crt"]
 starting = True
 
 
-def calc():
+def calc():  # set running to True and calls the go function
     running = True
     go()
 
 
-def end():
+def end():  # end function ends the program
     print("i see you are done")
     print("imma go now ig")
     print("cya")
     quit()
 
 
-def check_float(potential_float):
+def check_float(potential_float):  # check if the input is a float
     try:
         float(potential_float)
         return True
@@ -26,33 +29,35 @@ def check_float(potential_float):
         return False
 
 
-def commands(command1):
-    if command1 == "end":
+def commands(command1):  # looks for commands in inputs
+    if command1 == "end":  # looks for the "end" command
         end()
-    elif command1 == "help":
-        print("The commands are:")
-        print("history, end, help, command")
-        print("History: shows all results")
+    elif command1 == "commands":  # looks for the "commands" command
+        print("The commands are:")  # prints all commands
+        print("hist, end, commands, back")
+        print("Hist: shows all results")
         print("End: ends program")
         print("Help: shows all commands")
         print("Command: goes back to starting prompt")
-    elif command1 == "history":
-        print(history)
-    elif command1 == "start":
+    elif command1 == "hist":  # looks for "hist" command
+        print(history)  # prints the list of results recorded
+    elif command1 == "start":  # start command starts the actual calculator
         print("Lets go!!")
         calc()
-    elif command1 == "command":
-        helps(command1)
+    elif command1 == "back":  # goes back to starting screen
+        helps(False)  # "False" means the welcome text will not show up
+    elif command1 == "perfection":  # secret command. SHHHHHHHHHHH
+        print("I know right?!")
     else:
-        print("Please enter a valid command")
-        helps(False)
+        print("Please enter a valid command")  # if command is not recognized an error will appear
+        helps(False)  # will go back to starting screen
     if not running:
-        helps(command1)
+        helps(False)
     else:
-        calc()
+        calc()  # if running is true it will restart the calculator
 
 
-def com(command1):
+def com(command1):  # for looking for commands in first
     if command1 == "command":
         helps(False)
     elif command1 == "end":
@@ -66,10 +71,10 @@ def com(command1):
         go()
 
 
-def helps(starting):
-    if starting:
+def helps(starting1):
+    if starting1:
         print("WELCOME TO MY CALCULATOR")
-        starting = False
+        starting1 = False
     print("Command ('start' to start)")
     command = input("> ")
     commands(command)
@@ -99,6 +104,7 @@ def get_operator():
     else:
         print("That is not an operator")
         print("Please try again")
+        operation = 0
         get_operator()
     return operation
 
@@ -117,13 +123,13 @@ def single_argument_check(operation):
 
 
 def the_actual_math(first, operation, second):
-    if operation == "+":
+    if operation == operators[0]:
         result = float(first) + float(second)
-    elif operation == "-":
+    elif operation == operators[1]:
         result = float(first) - float(second)
-    elif operation == "*":
+    elif operation == (operators[2]):
         result = float(first) * float(second)
-    elif operation == "/":
+    elif operation == operators[4]:
         result = float(first) / float(second)
     elif operation == "**":
         result = float(first) ** float(second)
@@ -171,10 +177,10 @@ def the_actual_math(first, operation, second):
             result = (first + " is indeed not equal to " + second)
         else:
             result = (first + " is indeed equal to " + second)
+    if result:
+        return result
     else:
-        print("You need to put an operator (+, -, *, /, **, sqrt) in the operator prompt")
-        result = "Please try again"
-    return result
+        go()
 
 
 def go():
