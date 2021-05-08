@@ -1,17 +1,9 @@
-import enum
-
-import numpy as np
-
+# This is the horrid code to my calculator #
 # variables (theres not many here lol)
 history = []
 running = False
 operators = ["+", "-", "*", ".", "/", "**", "sqrt", "%", "<", "=", ">", "=/=", "//", "crt"]
 starting = True
-
-
-def calc():  # set running to True and calls the go function
-    running = True
-    go()
 
 
 def end():  # end function ends the program
@@ -43,18 +35,20 @@ def commands(command1):  # looks for commands in inputs
         print(history)  # prints the list of results recorded
     elif command1 == "start":  # start command starts the actual calculator
         print("Lets go!!")
-        calc()
+        go()
     elif command1 == "back":  # goes back to starting screen
         helps(False)  # "False" means the welcome text will not show up
     elif command1 == "perfection":  # secret command. SHHHHHHHHHHH
         print("I know right?!")
+    elif command1 == "poggers":
+        print("poggers")
     else:
         print("Please enter a valid command")  # if command is not recognized an error will appear
         helps(False)  # will go back to starting screen
     if not running:
         helps(False)
     else:
-        calc()  # if running is true it will restart the calculator
+        go()  # if running is true it will restart the calculator
 
 
 def com(command1):  # for looking for commands in first
@@ -65,6 +59,9 @@ def com(command1):  # for looking for commands in first
     elif command1 == "perfection":
         print("I know right?!")
         get_first()
+    elif command1 == "poggers":
+        print("poggers")
+        get_first()
     else:
         print("Not a valid integer/float")
         print("Please try again")
@@ -74,21 +71,29 @@ def com(command1):  # for looking for commands in first
 def helps(starting1):
     if starting1:
         print("WELCOME TO MY CALCULATOR")
-        starting1 = False
     print("Command ('start' to start)")
     command = input("> ")
     commands(command)
+
+
+def square_root(x):
+    x = x ** (1/2)
+    return x
 
 
 def get_first():
     print("First Command / Number")
     first = input("> ")
     if first == "pi":
-        first = np.pi
+        first = 3.14159265359
     elif first == "e":
-        first = np.e
+        first = 2.718281828459045
     elif first == "phi":
         first = 1.618033988749895
+    elif first == "rt2":
+        first = square_root(2)
+    elif first == "rt3":
+        first = square_root(3)
     if check_float(first):
         pass
     else:
@@ -136,7 +141,7 @@ def the_actual_math(first, operation, second):
     elif operation == "crt":
         result = pow(float(first), 1 / 3)
     elif operation == "sqrt":
-        result = np.sqrt(float(first))
+        result = square_root(first)
     elif operation == "%":
         result = float(first) % float(second)
     elif operation == "//":
@@ -177,10 +182,9 @@ def the_actual_math(first, operation, second):
             result = (first + " is indeed not equal to " + second)
         else:
             result = (first + " is indeed equal to " + second)
-    if result:
-        return result
     else:
-        go()
+        result = 0
+    return result
 
 
 def go():
@@ -197,7 +201,7 @@ def go():
     print(str(result))
     print("")
     history.append(result)
-    calc()
+    go()
 
 
 while True:
