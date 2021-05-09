@@ -1,5 +1,5 @@
 string = input("Cypher: ")
-c = 0
+c = 1
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
             'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
             's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a',
@@ -20,7 +20,7 @@ def run(c1):
         print(str(c1) + ": " + str("".join(output)))
         output.clear()
         c1 += 1
-        if c1 == 26:
+        if c1 == 27:
             quit()
         run(c1)
 
