@@ -1,4 +1,3 @@
-c = 1
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
             'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
             's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a',
@@ -9,28 +8,29 @@ output = []
 
 
 def inputs():
-    b = input("Cypher: ")
-    run(c, b)
+    inpu = input("Cypher: ")
+    run(1, inpu)
 
 
-def run(c, b):
-    offset = c
-    for x in b:
-        if str(x).isalpha():
-            pass
+def run(off, b):
+    for y in range(27):
+        for x in b:
+            if str(x).isalpha():
+                index = alphabet.index(x)
+                output.append(alphabet[index - off])
+            elif str(x) == " ":
+                output.append(" ")
+            else:
+                print("Please only use letters")
+                output.clear()
+                inputs()
         else:
-            print("Please only use letters")
+            print(str(off) + ": " + str("".join(output)))
             output.clear()
-            inputs()
-        index = alphabet.index(x)
-        output.append(alphabet[index - offset])
-    else:
-        print(str(c) + ": " + str("".join(output)))
-        output.clear()
-        c += 1
-        if c == 27:
-            print("")
-            inputs()
-        run(c, b)
+            off += 1
+            if off == 27:
+                print("")
+                inputs()
+
 
 inputs()
