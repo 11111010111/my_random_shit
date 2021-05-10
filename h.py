@@ -18,6 +18,12 @@ def inputs():
 def run(c1, b):
     offset = c1
     for x in b:
+        if str(x).isalpha():
+            pass
+        else:
+            print("Please only use letters")
+            output.clear()
+            inputs()
         index = alphabet.index(x)
         output.append(alphabet[index - offset])
     else:
